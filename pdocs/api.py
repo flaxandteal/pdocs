@@ -10,8 +10,6 @@ import sys
 import tempfile
 import webbrowser
 
-import hug
-
 import pdocs.extract
 import pdocs.logo
 import pdocs.render
@@ -119,19 +117,20 @@ def server(
         if len(modules) == 1:
             output_dir = os.path.join(output_dir, modules[0])
 
-        api = hug.API("Doc Server")
+        raise NotImplementedError("Hug has been removed")
+        # api = hug.API("Doc Server")
 
-        @hug.static("/", api=api)
-        def my_static_dirs():  # pragma: no cover
-            return (output_dir,)
+        # @hug.static("/", api=api)
+        # def my_static_dirs():  # pragma: no cover
+        #     return (output_dir,)
 
-        @hug.startup(api=api)
-        def custom_startup(*args, **kwargs):  # pragma: no cover
-            print(pdocs.logo.ascii_art)
-            if open_browser:
-                webbrowser.open_new(f"http://{host}:{port}")
+        # @hug.startup(api=api)
+        # def custom_startup(*args, **kwargs):  # pragma: no cover
+        #     print(pdocs.logo.ascii_art)
+        #     if open_browser:
+        #         webbrowser.open_new(f"http://{host}:{port}")
 
-        api.http.serve(host=host, port=port, no_documentation=True, display_intro=False)
+        # api.http.serve(host=host, port=port, no_documentation=True, display_intro=False)
 
 
 def _get_root_modules(module_names):
